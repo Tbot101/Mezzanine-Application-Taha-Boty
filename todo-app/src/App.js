@@ -7,7 +7,7 @@ function Todo({todo, index, completeTodo, removeTodo, redoTodo, setPriority}){
       className="todo"
       style={{ backgroundColor: todo.isPriority ? "yellow" : "white", textDecoration: todo.isCompleted ? "line-through" : "" }}
     >
-      {todo.text}
+      Task {index+1}: {todo.text}
       <div>
         <button className = "button buttoncomplete" onClick={() => completeTodo(index)}>Complete</button>
         <button className = "button buttonredo" onClick={() => redoTodo(index)}>Redo Todo</button>
@@ -44,17 +44,17 @@ function TodoForm({ addTodo }) {
 function App() {
   const [todos, setTodos] = React.useState([
     {
-      text: "Todo 1",
+      text: "blah blah",
       isCompleted: false,
       isPriority: false
     },
     {
-      text: "Todo 2",
+      text: "asdf",
       isCompleted: false,
       isPriority: false
     },
     {
-      text: "Todo 3",
+      text: "done",
       isCompleted: false,
       isPriority: false
     }
