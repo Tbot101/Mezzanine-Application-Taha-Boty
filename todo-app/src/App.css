@@ -1,24 +1,88 @@
 .app {
-  background: #209cee;
+  background: #63acf0;
   height: 100vh;
-  padding: 30px;
+  padding: 50px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  align-items: center;
 }
 
 .todo-list {
   background: #e8e8e8;
-  border-radius: 4px;
-  max-width: 400px;
-  padding: 5px;
+  border-radius: 10px;
+  max-width: 550px;
+  padding: 20px;
+  margin: auto;
 }
 
 .todo {
   align-items: center;
   background: #fff;
-  border-radius: 3px;
+  border-radius: 5px;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
   display: flex;
-  font-size: 12px;
+  font-size: 15px;
   justify-content: space-between;
-  margin-bottom: 6px;
-  padding: 3px 10px;
+  margin-bottom: 5px;
+  padding: 10px 10px;
+  border-left-style: solid;
+  border-left-width: 10px;
+  border-left-color: black;
+}
+
+.todoform {
+  padding: 5px;
+}
+
+.input {
+  border-radius: 5px;
+  background: #fff;
+  height: 25px;
+  width: 100%;
+}
+
+.button {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  transition-duration: 0.4s;
+  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+  margin: 5px;
+  font-size: 12px;
+}
+
+.buttoncomplete:hover {
+  color: black;
+  background-color: #38f748;
+}
+
+.buttonredo:hover {
+  color: black;
+  background-color: #f7a438;
+}
+
+.buttondelete {
+  font-weight: bold;
+}
+
+.buttondelete:hover {
+  color: black;
+  background-color: #f74538;
+}
+
+.buttonpriority:hover {
+  color: black;
+  background-color: #f7f438;
+}
+
+.completewrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.complete {
+  background-color: #fff;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
 }

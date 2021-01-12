@@ -1,6 +1,23 @@
 import './App.css';
 import React from 'react';
 
+function Todo({todo, index, completeTodo, removeTodo, redoTodo, setPriority}){
+  return(
+    <div 
+      className="todo"
+      style={{ backgroundColor: todo.isPriority ? "yellow" : "white", textDecoration: todo.isCompleted ? "line-through" : "" }}
+    >
+      {todo.text}
+      <div>
+        <button className = "button buttoncomplete" onClick={() => completeTodo(index)}>Complete</button>
+        <button className = "button buttonredo" onClick={() => redoTodo(index)}>Redo Todo</button>
+        <button className = "button buttonpriority" onClick={() => setPriority(index)}>!</button>
+        <button className = "button buttondelete" onClick={() => removeTodo(index)}>X</button>
+      </div>
+    </div>
+  );
+};
+
 function TodoForm({ addTodo }) {
   const [value, setValue] = React.useState("");
 
@@ -12,7 +29,7 @@ function TodoForm({ addTodo }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className ="todoform" onSubmit={handleSubmit}>
       <input
         type="text"
         className="input"
@@ -23,34 +40,22 @@ function TodoForm({ addTodo }) {
   );
 }
 
-function Todo({todo, index, completeTodo, removeTodo}){
-  return(
-    <div 
-      className="todo"
-      style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}
-    >
-      {todo.text}
-      <div>
-        <button onClick={() => completeTodo(index)}>Complete</button>
-        <button onClick={() => removeTodo(index)}>x</button>
-      </div>
-    </div>
-  );
-};
-
 function App() {
   const [todos, setTodos] = React.useState([
     {
       text: "Learn about React",
-      isCompleted: false
+      isCompleted: false,
+      isPriority: false
     },
     {
       text: "Meet friend for lunch",
-      isCompleted: false
+      isCompleted: false,
+      isPriority: false
     },
     {
       text: "Build really cool todo app",
-      isCompleted: false
+      isCompleted: false,
+      isPriority: false
     }
   ]);
   
@@ -62,18 +67,53 @@ function App() {
   
   const completeTodo = index => {
     const newTodos = [...todos];
+    
+    if(newTodos[index].isCompleted == false){
+      setCompleted(prevCount => prevCount + 1);
+      setIncompleted(prevCount => prevCount - 1);
+    };
+
     newTodos[index].isCompleted = true;
-    setCompleted(prevCount => prevCount + 1);
-    setIncompleted(prevCount => prevCount - 1);
     setTodos(newTodos);
   };
-
+  
+  const redoTodo = index => {
+    const newTodos = [...todos];
+    
+    if(newTodos[index].isCompleted == true){
+      setCompleted(prevCount => prevCount - 1);
+      setIncompleted(prevCount => prevCount + 1);
+    };
+    
+    newTodos[index].isCompleted = false;
+    setTodos(newTodos);
+  };
+  
+  const setPriority = index => {
+    const newTodos = [...todos];
+    
+    if(newTodos[index].isPriority == false){
+      newTodos[index].isPriority = true;
+    } else if(newTodos[index].isPriority == true){
+      newTodos[index].isPriority = false;
+    };
+    
+    setTodos(newTodos);
+  };
+  
   const removeTodo = index => {
     const newTodos = [...todos];
+    
+    if(newTodos[index].isCompleted == true){
+      setCompleted(prevCount => prevCount - 1);
+    } else{
+      setIncompleted(prevCount => prevCount - 1);
+    };
+
     newTodos.splice(index, 1);
-    setTodos(newTodos)
-    setCompleted(prevCount => prevCount - 1);
+    setTodos(newTodos);
   };
+  
 
   const [completed, setCompleted] = React.useState(0)
 
@@ -90,12 +130,16 @@ function App() {
             todo = {todo}
             completeTodo = {completeTodo}
             removeTodo = {removeTodo}
+            redoTodo = {redoTodo}
+            setPriority = {setPriority}
           />
         ))}
         <TodoForm addTodo={addTodo} />
-      </div>
-      <div className="complete">Complete {completed}</div>
-      <div className="complete">Incomplete {incompleted}</div>
+        <div className="completewrapper">
+          <div className="complete">Complete: {completed}</div>
+          <div className="complete">Incomplete: {incompleted}</div>
+        </div>
+      </div>    
     </div>
   );
 }
