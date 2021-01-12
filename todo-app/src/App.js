@@ -35,6 +35,7 @@ function TodoForm({ addTodo }) {
         className="input"
         value={value}
         onChange={e => setValue(e.target.value)}
+        placeholder = "Insert New Todo"
       />
     </form>
   );
@@ -43,24 +44,24 @@ function TodoForm({ addTodo }) {
 function App() {
   const [todos, setTodos] = React.useState([
     {
-      text: "Learn about React",
+      text: "Todo 1",
       isCompleted: false,
       isPriority: false
     },
     {
-      text: "Meet friend for lunch",
+      text: "Todo 2",
       isCompleted: false,
       isPriority: false
     },
     {
-      text: "Build really cool todo app",
+      text: "Todo 3",
       isCompleted: false,
       isPriority: false
     }
   ]);
   
-  const addTodo = text => {
-    const newTodos = [...todos, { text }];
+  const addTodo = (text) => {
+    const newTodos = [...todos, { text, isCompleted: false, isPriority: false }];
     setTodos(newTodos);
     setIncompleted(prevCount => prevCount + 1);
   };
